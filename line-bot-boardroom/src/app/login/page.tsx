@@ -60,7 +60,13 @@ const Login = () => {
 
         <div className="pt-1 pb-2 text-right">
           <Link
-            href="#"
+            href="/login/register"
+            className="font-bold hover:border-b hover:border-slate-700 mr-3"
+          >
+            註冊帳號
+          </Link>
+          <Link
+            href="/login/forgetpw"
             className="font-bold hover:border-b hover:border-slate-700"
           >
             忘記密碼?
