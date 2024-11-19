@@ -59,7 +59,12 @@ const Login = () => {
         </div>
 
         <div className="pt-1 pb-2 text-right">
-          <Link href="#">忘記密碼?</Link>
+          <Link
+            href="#"
+            className="font-bold hover:border-b hover:border-slate-700"
+          >
+            忘記密碼?
+          </Link>
         </div>
 
         <div className="p-2">
