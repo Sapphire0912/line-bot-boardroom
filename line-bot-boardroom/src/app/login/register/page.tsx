@@ -127,7 +127,7 @@ const register = () => {
             已有帳號?
           </Link>
           <Link
-            href="/login/forgetpw"
+            href="/login/forgotpw"
             className="font-bold hover:border-b hover:border-slate-700"
           >
             忘記密碼?

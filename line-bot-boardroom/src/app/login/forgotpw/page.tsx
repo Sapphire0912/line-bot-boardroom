@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,7 +10,7 @@ const forgetpw = () => {
 
   return (
     <div className="2xl:w-1/3 xl:w-1/2 lg:w-[60%] md:w-[70%] w-[90%] h-1/2 border border-gray-500 rounded-xl p-6 bg-slate-200 shadow-2xl">
-      <h3 className="font-bold text-2xl text-center p-2">找回密碼</h3>
+      <h3 className="font-bold text-2xl text-center p-2">修改密碼</h3>
       <form>
         <div className="flex-col p-2">
           <label htmlFor="userid" className={labelStyle}>

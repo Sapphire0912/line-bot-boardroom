@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -66,7 +68,7 @@ const Login = () => {
             註冊帳號
           </Link>
           <Link
-            href="/login/forgetpw"
+            href="/login/forgotpw"
             className="font-bold hover:border-b hover:border-slate-700"
           >
             忘記密碼?
