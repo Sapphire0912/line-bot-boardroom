@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { registerUser } from "@/services/login/register";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const register = () => {
   const inputStyle: string = "w-full outline-none bg-transparent";
@@ -21,6 +21,8 @@ const register = () => {
   const formChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const router = useRouter();
   const formSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -29,7 +31,7 @@ const register = () => {
       setMessage(result.message);
 
       if (result.status == 201) {
-        redirect("/login");
+        router.push("/login");
       }
     } catch (error) {
       setMessage("前端頁面呼叫 API 失敗");
