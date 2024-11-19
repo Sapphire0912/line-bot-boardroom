@@ -1,8 +1,9 @@
-import Title from "@/components/title";
+import React from "react";
+import Title from "@/components/Title";
 
 const page = () => {
   return (
-    <section>
+    <section className="w-full">
       <Title />
     </section>
   );

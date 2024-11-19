@@ -5,6 +5,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html>
       <body>
+        <title>LINE 留言板</title>
         <main>{children}</main>
       </body>
     </html>

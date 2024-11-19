@@ -2,9 +2,11 @@ import React from "react";
 
 const title = () => {
   return (
-    <section className="m-4 font-bold text-4xl text-center w-full text-green-400">
-      LINE Bulletin board
-    </section>
+    <div className="p-4 border-b-2 border-slate-400 bg-slate-100">
+      <h1 className="text-4xl font-bold text-green-400 text-center">
+        LINE 留言板
+      </h1>
+    </div>
   );
 };
 
