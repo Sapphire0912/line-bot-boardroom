@@ -1,7 +1,11 @@
-import React from "react";
+import Title from "@/components/title";
 
 const page = () => {
-  return <div>page</div>;
+  return (
+    <section>
+      <Title />
+    </section>
+  );
 };
 
 export default page;
