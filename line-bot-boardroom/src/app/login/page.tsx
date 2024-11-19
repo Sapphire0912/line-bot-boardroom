@@ -17,10 +17,10 @@ const Login = () => {
           <div className="pt-2 flex items-center border-b border-black">
             <span className="mr-2 mb-1">
               <Image
-                src="/username.png"
+                src="/useraccount.png"
                 width={32}
                 height={32}
-                alt="username"
+                alt="useraccount"
                 priority
               />
             </span>
