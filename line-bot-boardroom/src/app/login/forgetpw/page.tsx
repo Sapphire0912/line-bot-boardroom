@@ -58,6 +58,54 @@ const forgetpw = () => {
           </div>
         </div>
 
+        <div className="flex-col p-2">
+          <label htmlFor="password" className={labelStyle}>
+            新密碼 *
+          </label>
+          <div className="pt-2 flex items-center border-b border-black">
+            <span className="mr-2 mb-1">
+              <Image
+                src="/password.png"
+                width={32}
+                height={32}
+                alt="password"
+                priority
+              />
+            </span>
+
+            <input
+              className={inputStyle}
+              type="password"
+              name="password"
+              id="password"
+            ></input>
+          </div>
+        </div>
+
+        <div className="flex-col p-2">
+          <label htmlFor="newPassword" className={labelStyle}>
+            確認新密碼 *
+          </label>
+          <div className="pt-2 flex items-center border-b border-black">
+            <span className="mr-2 mb-1">
+              <Image
+                src="/password.png"
+                width={32}
+                height={32}
+                alt="newPassword"
+                priority
+              />
+            </span>
+
+            <input
+              className={inputStyle}
+              type="password"
+              name="newPassword"
+              id="newPassword"
+            ></input>
+          </div>
+        </div>
+
         <div className="pt-1 pb-2 text-right">
           <Link
             href="/login/register"

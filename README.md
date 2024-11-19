@@ -15,6 +15,7 @@
 ### 後端
 
 - **Node.js**
+- **Express.js**
 - **Javascript/Typescript**
 - **Socket.io**
 
