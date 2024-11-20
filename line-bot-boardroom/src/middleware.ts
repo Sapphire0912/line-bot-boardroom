@@ -1,6 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 
-const baseURL = process.env.PUBLIC_URL || "http://localhost:6543";
+/* 處理 使用者是否有 token 前往 boardroom 的網頁 */
+const baseURL = process.env.PUBLIC_URL || "http://localhost:6543"; // 未來要更改成部署的 URL
 
 export async function middleware(req: NextRequest) {
   const token =
