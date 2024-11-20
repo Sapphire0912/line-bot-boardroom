@@ -15,17 +15,14 @@
 ### 後端
 
 - **Node.js**
-- **Express.js**
 - **Javascript/Typescript**
 - **Socket.io**
-
-### 資料庫
-
 - **MongoDB**
 
 ### 其他
 
 - **Line Message API**
+- **Line Login**
 - **Vercel**
 
 ## 時程
