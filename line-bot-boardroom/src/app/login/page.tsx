@@ -1,12 +1,24 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 const Login = () => {
   const inputStyle: string = "w-full outline-none bg-transparent";
   const labelStyle: string = "font-bold text-lg";
+
+  /* 處理前端元件狀態及 services api 請求 */
+  const [formData, setFormData] = useState({
+    account: "",
+    password: "",
+  });
+  const [message, setMessage] = useState<string | null>("");
+
+  const formChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  /* End. */
 
   return (
     <div className="2xl:w-1/3 xl:w-1/2 lg:w-[60%] md:w-[70%] w-[90%] h-1/2 border border-gray-500 rounded-xl p-6 bg-slate-200 shadow-2xl">
@@ -32,6 +44,8 @@ const Login = () => {
               type="text"
               name="account"
               id="account"
+              value={formData.account}
+              onChange={formChange}
             ></input>
           </div>
         </div>
@@ -56,6 +70,8 @@ const Login = () => {
               type="password"
               name="password"
               id="password"
+              value={formData.password}
+              onChange={formChange}
             ></input>
           </div>
         </div>
@@ -74,6 +90,10 @@ const Login = () => {
             忘記密碼?
           </Link>
         </div>
+
+        {message && (
+          <p className="font-bold text-base p-2 text-blue-600">{message}</p>
+        )}
 
         <div className="p-2">
           <button

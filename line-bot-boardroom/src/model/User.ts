@@ -26,9 +26,19 @@ export interface UserInterface extends Document {
   updateAt: string;
 }
 
-const UserSchema: Schema<UserInterface> = new Schema<UserInterface>({
+export interface UserDocument extends Document, UserInterface {
+  comparePassword(password: string): Promise<boolean>;
+}
+
+const UserSchema: Schema<UserDocument> = new Schema<UserDocument>({
   username: { type: String, required: true, unique: true },
-  account: { type: String, required: true, minLength: 8, maxLength: 20 },
+  account: {
+    type: String,
+    required: true,
+    minLength: 8,
+    maxLength: 20,
+    unique: true,
+  },
   password: { type: String, required: true, minLength: 8, maxLength: 20 },
   lineid: { type: String },
   role: { type: String, enum: ["user", "admin"], default: "user" },
@@ -38,7 +48,7 @@ const UserSchema: Schema<UserInterface> = new Schema<UserInterface>({
 
 // 密碼加密 middleware
 UserSchema.pre("save", async function (next) {
-  const user = this as UserInterface;
+  const user = this as UserDocument;
 
   if (!user.isModified("password")) return next();
 
@@ -53,6 +63,6 @@ UserSchema.methods.comparePassword = async function (password: string) {
 };
 
 // 匯出 User model
-const User: Model<UserInterface> =
-  mongoose.models.User || mongoose.model<UserInterface>("User", UserSchema);
+const User: Model<UserDocument> =
+  mongoose.models.User || mongoose.model<UserDocument>("User", UserSchema);
 export default User;

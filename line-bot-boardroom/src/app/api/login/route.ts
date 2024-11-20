@@ -1,16 +1,30 @@
 import { NextResponse } from "next/server";
+import { connectMongoDB } from "@/lib/dbconnect";
+import User from "@/model/User";
 import { generateToken } from "@/lib/jwt";
 
 export async function POST(req: Request) {
-  const body = await req.json();
+  try {
+    const { account, password } = await req.json();
 
-  const { account, password } = body;
+    await connectMongoDB();
 
-  // 模擬用戶認證（實際應該從資料庫檢查）
-  if (account === "testuser" && password === "testpassword") {
-    const token = generateToken({ account });
-    return NextResponse.json({ token });
+    // 檢查使用者是否存在
+    const isExistUser = await User.findOne({ account }).exec();
+    if (!isExistUser || !(await isExistUser.comparePassword(password)))
+      return NextResponse.json({ message: "帳號或密碼錯誤", status: 401 });
+
+    const jwt_token = generateToken({
+      id: isExistUser._id,
+      account: isExistUser.account,
+    });
+
+    return NextResponse.json({
+      message: "驗證成功",
+      token: jwt_token,
+      status: 200,
+    });
+  } catch (error) {
+    return NextResponse.json({ message: "登入失敗，伺服器錯誤", status: 500 });
   }
-
-  return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
 }

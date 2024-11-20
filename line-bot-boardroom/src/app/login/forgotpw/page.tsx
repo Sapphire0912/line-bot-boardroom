@@ -32,10 +32,10 @@ const forgetpw = () => {
       setMessage(result.message);
 
       if (result.status == 201) {
+        setMessage("修改成功，即將返回登入首頁");
         router.push("/login");
       }
     } catch (error) {
-      console.log(error);
       setMessage("前端頁面呼叫 API 失敗");
     }
   };
