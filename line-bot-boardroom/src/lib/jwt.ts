@@ -18,6 +18,7 @@ export const verifyToken = (token: string) => {
   try {
     return jwt.verify(token, secret);
   } catch (error) {
+    console.log("jwt error: ", error);
     throw new Error("錯誤的 JWT token 或者 token 已過期");
   }
 };

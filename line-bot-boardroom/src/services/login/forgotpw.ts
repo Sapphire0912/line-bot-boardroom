@@ -33,7 +33,6 @@ export const modifyPassword = async (data: {
     });
 
     const info = await response.json();
-    if (!response.ok) return { message: info.error, status: info.status };
     return { message: info.message, status: info.status };
   } catch (error) {
     return { message: "Fetch forgotpw API 失敗", status: 500 };

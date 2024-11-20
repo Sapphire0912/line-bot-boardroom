@@ -31,7 +31,7 @@ const register = () => {
       setMessage(result.message);
 
       if (result.status == 201) {
-        setMessage("註冊成功，即將返回登入首頁");
+        /* 等待 1 秒再 redirect */
         router.push("/login");
       }
     } catch (error) {
