@@ -27,7 +27,12 @@ export const loginSystem = async (data: {
       body: JSON.stringify({ account, password }),
     });
     const info = await response.json(); // 此處沒有接收 api/login 與回傳 jwt_token
-    return { message: info.message, status: info.status };
+    return {
+      message: info.message,
+      status: info.status,
+      username: info.username,
+      role: info.role,
+    };
   } catch (error) {
     return { message: "Fetch Login API 失敗", status: 500 };
   }

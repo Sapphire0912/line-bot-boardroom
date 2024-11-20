@@ -14,11 +14,17 @@ export async function middleware(req: NextRequest) {
     body: JSON.stringify({ token }),
   });
 
-  if (!verifyResponse.ok) {
+  if (!verifyResponse.ok)
     return NextResponse.redirect(new URL("/login", req.url));
-  }
 
-  return NextResponse.next();
+  const info = await verifyResponse.json();
+  const rolePath = req.nextUrl.pathname.split("/")[2];
+
+  if (info.role === rolePath) {
+    return NextResponse.next();
+  } else {
+    return NextResponse.redirect(new URL("/error", req.url));
+  }
 }
 
 export const config = {

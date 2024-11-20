@@ -30,7 +30,7 @@ const Login = () => {
       setMessage(result.message);
 
       if (result.status === 200) {
-        router.push("/boardroom");
+        router.push(`/boardroom/${result.role}`);
       }
     } catch (error) {
       setMessage("前端頁面呼叫 API 失敗");

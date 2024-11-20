@@ -17,12 +17,17 @@ export async function POST(req: Request) {
     // 回傳 JWT token
     const jwt_token = generateToken({
       id: isExistUser._id,
+      username: isExistUser.username,
       account: isExistUser.account,
+      role: isExistUser.role,
     });
 
     const response = NextResponse.json({
-      message: "驗證成功",
+      message: "登入成功",
       token: jwt_token,
+      username: isExistUser.username,
+      account: isExistUser.account,
+      role: isExistUser.role,
       status: 200,
     });
     response.cookies.set("token", jwt_token, {
