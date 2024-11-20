@@ -64,6 +64,7 @@ const register = () => {
               type="text"
               name="username"
               id="username"
+              placeholder="請輸入使用者名稱"
               value={formData.username}
               onChange={formChange}
             ></input>
@@ -90,6 +91,7 @@ const register = () => {
               type="text"
               name="account"
               id="account"
+              placeholder="請輸入至少 8 個字元"
               value={formData.account}
               onChange={formChange}
             ></input>
@@ -116,6 +118,7 @@ const register = () => {
               type="password"
               name="password"
               id="password"
+              placeholder="請輸入至少 8 個字元"
               value={formData.password}
               onChange={formChange}
             ></input>

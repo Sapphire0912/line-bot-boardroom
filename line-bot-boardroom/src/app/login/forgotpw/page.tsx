@@ -65,6 +65,7 @@ const forgetpw = () => {
               type="text"
               name="username"
               id="username"
+              placeholder="請輸入使用者名稱"
               value={formData.username}
               onChange={formChange}
             ></input>
@@ -91,6 +92,7 @@ const forgetpw = () => {
               type="text"
               name="account"
               id="account"
+              placeholder="請輸入至少 8 個字元"
               value={formData.account}
               onChange={formChange}
             ></input>
@@ -117,6 +119,7 @@ const forgetpw = () => {
               type="password"
               name="newPassword"
               id="newPassword"
+              placeholder="請輸入至少 8 個字元"
               value={formData.newPassword}
               onChange={formChange}
             ></input>
@@ -143,6 +146,7 @@ const forgetpw = () => {
               type="password"
               name="confirmPassword"
               id="confirmPassword"
+              placeholder="請再次輸入密碼"
               value={formData.confirmPassword}
               onChange={formChange}
             ></input>
