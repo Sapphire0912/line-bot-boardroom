@@ -20,7 +20,7 @@ export async function middleware(req: NextRequest) {
   const info = await verifyResponse.json();
   const rolePath = req.nextUrl.pathname.split("/")[2];
 
-  if (info.role === rolePath) {
+  if (info.role === rolePath || rolePath === "profile") {
     const response = NextResponse.next();
     response.headers.set("username", info.username);
     return response;

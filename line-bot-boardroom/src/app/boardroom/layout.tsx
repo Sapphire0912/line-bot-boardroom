@@ -17,7 +17,7 @@ export default async function BoardroomLayout({
     return (
       <section>
         <Title />
-        <section>
+        <section className="min-h-screen flex flex-col">
           <h1 className="text-4xl">拒絕存取。</h1>
           <p className="text-2xl">使用者未登入，請返回登入頁面。</p>
           <Link href="/login">返回登入頁面</Link>
