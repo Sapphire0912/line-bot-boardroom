@@ -4,7 +4,8 @@
 
 - 完成 boardroom 前端介面設計
 - 完成 Users 個人頁面模板
-- 完成 Line Message Schema
+- 完成 Line Login 功能
+- 完成 Line Login Schema
 
 ### 11.20
 

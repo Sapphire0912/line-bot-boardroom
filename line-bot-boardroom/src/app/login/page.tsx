@@ -138,7 +138,8 @@ const Login = () => {
                 priority
               />
             </span>
-            <span>使用 LINE 登入</span>
+            <Link href="/api/auth/line">使用 LINE 登入</Link>
+            {/* 需要更改成 fetch 操作, 將 Link 改成 button */}
           </button>
         </div>
       </form>
