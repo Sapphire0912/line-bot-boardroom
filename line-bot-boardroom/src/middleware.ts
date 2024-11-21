@@ -21,7 +21,9 @@ export async function middleware(req: NextRequest) {
   const rolePath = req.nextUrl.pathname.split("/")[2];
 
   if (info.role === rolePath) {
-    return NextResponse.next();
+    const response = NextResponse.next();
+    response.headers.set("username", info.username);
+    return response;
   } else {
     return NextResponse.redirect(new URL("/error", req.url));
   }
