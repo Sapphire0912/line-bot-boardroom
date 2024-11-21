@@ -29,9 +29,7 @@ export default async function BoardroomLayout({
     <section>
       <BoardTitle username={username} />
       <section className="min-h-screen flex flex-col">
-        <div className="flex flex-grow justify-center items-center">
-          {children}
-        </div>
+        <div className="flex flex-grow">{children}</div>
       </section>
     </section>
   );
