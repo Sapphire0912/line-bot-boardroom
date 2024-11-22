@@ -26,6 +26,7 @@ export async function middleware(req: NextRequest) {
     // 設置 header 提供給前端訊息, 中文字符需要經過編碼
     response.headers.set("username", encodeURIComponent(info.username));
     response.headers.set("displayName", encodeURIComponent(info.displayName));
+    response.headers.set("role", info.role);
 
     return response;
   } else {

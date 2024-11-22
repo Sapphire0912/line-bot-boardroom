@@ -2,6 +2,8 @@ import React from "react";
 import { headers } from "next/headers";
 import Link from "next/link";
 import Title from "@/components/Title";
+
+import { UserProvider } from "@/context/UserContext";
 import BoardTitle from "@/components/BoardTitle";
 
 export default async function BoardroomLayout({
@@ -9,7 +11,7 @@ export default async function BoardroomLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // 從 header 中取得 username/displayName, role 資料
+  /* 從 header 中取得 username/displayName 資訊, 並且使用 context provider 共享訊息 */
   const headersList = await headers();
 
   const encode_username: string | null = headersList.get("username") ?? null;
@@ -17,7 +19,6 @@ export default async function BoardroomLayout({
     headersList.get("displayName") ?? null;
   const role = headersList.get("role");
 
-  console.log(encode_username, encode_displayName);
   if (!encode_username && !encode_displayName) {
     return (
       <section>
@@ -32,16 +33,17 @@ export default async function BoardroomLayout({
   }
 
   // 預設顯示 Line 名稱
-  const username = encode_displayName
+  const username: string = encode_displayName
     ? decodeURIComponent(encode_displayName)
     : decodeURIComponent(encode_username as string);
 
+  console.log("layout: ", username, role);
   return (
-    <section>
-      <BoardTitle username={username} />
+    <UserProvider defaultUsername={username} defaultRole={role}>
+      <BoardTitle />
       <section className="min-h-screen flex flex-col">
         <div className="flex flex-grow">{children}</div>
       </section>
-    </section>
+    </UserProvider>
   );
 }

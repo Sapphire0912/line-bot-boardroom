@@ -4,8 +4,9 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/context/UserContext";
 
-const BoardTitle = ({ username }: { username: string }) => {
+const BoardTitle = () => {
   /* 處理登出按鈕邏輯，不經過 services 處理 */
   const router = useRouter();
   const handleLogout = async () => {
@@ -23,6 +24,10 @@ const BoardTitle = ({ username }: { username: string }) => {
     }
   };
   /* End. */
+
+  // 取得 user context API 資訊
+  const { username, role, setUsername, setRole } = useUser();
+  console.log("board title", username, role);
 
   return (
     <div className="p-4 border-b-2 border-slate-400 bg-slate-200 flex items-center justify-between">

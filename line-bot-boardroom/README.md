@@ -3,6 +3,10 @@
 ### 11.22
 
 - 修正 Line Login Callback 的邏輯
+- 新增 middleware Header 設定
+- 調整 JWT 生成資訊
+- 調整 Line Login Schema 欄位
+- 使用 Context API 共享使用者資訊
 - 新增 profile 模板頁面
 
 ### 11.21
