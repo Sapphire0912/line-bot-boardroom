@@ -38,6 +38,11 @@ const Login = () => {
   };
   /* End. */
 
+  /* 處理 Line Login 邏輯 */
+  const handleLinelogin = async () => {
+    window.location.href = "/api/auth/line";
+  };
+
   return (
     <div className="2xl:w-1/3 xl:w-1/2 lg:w-[60%] md:w-[70%] w-[90%] h-1/2 border border-gray-500 rounded-xl p-6 bg-slate-200 shadow-2xl">
       <h3 className="font-bold text-2xl text-center p-2">登入留言板</h3>
@@ -126,8 +131,9 @@ const Login = () => {
 
         <div className="p-2 flex justify-center">
           <button
-            type="submit"
+            type="button"
             className="flex items-center justify-center border-2 w-1/2 border-green-200 bg-green-500 text-xl rounded-2xl font-bold text-white"
+            onClick={handleLinelogin}
           >
             <span className="ml-1 mr-1 text-inherit">
               <Image
@@ -138,8 +144,7 @@ const Login = () => {
                 priority
               />
             </span>
-            <Link href="/api/auth/line">使用 LINE 登入</Link>
-            {/* 需要更改成 fetch 操作, 將 Link 改成 button */}
+            <span>使用 LINE 登入</span>
           </button>
         </div>
       </form>

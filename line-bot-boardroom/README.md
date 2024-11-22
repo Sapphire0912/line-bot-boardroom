@@ -1,5 +1,10 @@
 ## 開發進度
 
+### 11.22
+
+- 修正 Line Login Callback 的邏輯
+- 新增 profile 模板頁面
+
 ### 11.21
 
 - 完成 boardroom 前端介面設計

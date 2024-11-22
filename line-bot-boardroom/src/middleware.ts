@@ -22,7 +22,11 @@ export async function middleware(req: NextRequest) {
 
   if (info.role === rolePath || rolePath === "profile") {
     const response = NextResponse.next();
-    response.headers.set("username", info.username);
+
+    // 設置 header 提供給前端訊息, 中文字符需要經過編碼
+    response.headers.set("username", encodeURIComponent(info.username));
+    response.headers.set("displayName", encodeURIComponent(info.displayName));
+
     return response;
   } else {
     return NextResponse.redirect(new URL("/error", req.url));

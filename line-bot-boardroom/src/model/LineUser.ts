@@ -18,6 +18,7 @@ export interface LineUserInterface extends Document {
   lineid: string;
   displayName: string;
   pictureUrl: string;
+  role: string;
   localusername: string;
   localaccount: string;
   createAt: string;
@@ -28,6 +29,7 @@ const LineUserSchema: Schema<LineUserInterface> = new Schema<LineUserInterface>(
     lineid: { type: String, required: true, unique: true },
     displayName: { type: String, required: true },
     pictureUrl: { type: String, default: null },
+    role: { type: String, enum: ["user", "admin"], default: "user" },
     localusername: { type: String, default: null },
     localaccount: { type: String, default: null },
     createAt: { type: String, default: () => convtoTWDate(new Date()) },

@@ -12,7 +12,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       message: "驗證成功",
       status: 200,
-      username: payload.username,
+      username: payload.username || null,
+      displayName: payload.displayName || null,
       role: payload.role,
     });
   } catch (error) {

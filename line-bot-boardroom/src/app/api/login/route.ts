@@ -30,6 +30,7 @@ export async function POST(req: Request) {
       role: isExistUser.role,
       status: 200,
     });
+
     response.cookies.set("token", jwt_token, {
       httpOnly: true,
       secure: false, // 允許 localhost 測試，公開要設置成 true
@@ -37,6 +38,7 @@ export async function POST(req: Request) {
       path: "/",
       maxAge: 60 * 60 * 24, // 有效期 1 天
     });
+
     return response;
   } catch (error) {
     return NextResponse.json({ message: "登入失敗，伺服器錯誤", status: 500 });
