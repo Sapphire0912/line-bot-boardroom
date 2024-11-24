@@ -27,6 +27,9 @@ export async function middleware(req: NextRequest) {
     response.headers.set("username", encodeURIComponent(info.username));
     response.headers.set("displayName", encodeURIComponent(info.displayName));
     response.headers.set("role", info.role);
+    response.headers.set("loginMethod", info.loginMethod);
+    response.headers.set("isBind", info.isBind);
+    response.headers.set("createAt", info.createAt);
 
     return response;
   } else {

@@ -20,6 +20,9 @@ export async function POST(req: Request) {
       username: isExistUser.username,
       account: isExistUser.account,
       role: isExistUser.role,
+      loginMethod: "local",
+      isBind: isExistUser.lineid ? true : false, // 判斷是否連結 line 帳號
+      createAt: isExistUser.createAt,
     });
 
     const response = NextResponse.json({
@@ -28,6 +31,9 @@ export async function POST(req: Request) {
       username: isExistUser.username,
       account: isExistUser.account,
       role: isExistUser.role,
+      loginMethod: "local",
+      isBind: isExistUser.lineid ? true : false, // 判斷是否連結 line 帳號
+      createAt: isExistUser.createAt,
       status: 200,
     });
 

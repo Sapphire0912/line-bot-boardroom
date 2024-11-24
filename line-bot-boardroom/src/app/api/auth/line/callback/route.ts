@@ -63,6 +63,9 @@ export async function GET(req: Request) {
       displayName: isExistUser.displayName,
       pictureUrl: isExistUser.pictureUrl,
       role: isExistUser.role,
+      loginMethod: "Line",
+      isBind: isExistUser.localusername ? true : false, // 判斷是否連結本地帳號
+      createAt: isExistUser.createAt,
     });
 
     const response = NextResponse.redirect(

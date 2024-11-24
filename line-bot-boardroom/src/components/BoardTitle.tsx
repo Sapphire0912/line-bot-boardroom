@@ -27,7 +27,6 @@ const BoardTitle = () => {
 
   // 取得 user context API 資訊
   const { username, role, setUsername, setRole } = useUser();
-  console.log("board title", username, role);
 
   return (
     <div className="p-4 border-b-2 border-slate-400 bg-slate-200 flex items-center justify-between">

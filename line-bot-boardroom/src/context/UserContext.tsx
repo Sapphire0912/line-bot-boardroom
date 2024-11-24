@@ -5,8 +5,14 @@ import React, { createContext, useContext, ReactNode, useState } from "react";
 interface UserContextType {
   username: string | null;
   role: string | null;
+  method: string | null;
+  isBind: boolean;
+  createDate: string | null;
   setUsername: (username: string | null) => void;
   setRole: (role: string | null) => void;
+  setLoginMethod: (method: string | null) => void;
+  setCreateDate: (createDate: string | null) => void;
+  setIsBind: (isBind: boolean) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined); // 默認值
@@ -14,18 +20,40 @@ const UserContext = createContext<UserContextType | undefined>(undefined); // �
 // 設定 Provider
 export const UserProvider = ({
   children,
+  loginMethod,
+  bind,
+  lastCreateAt,
   defaultUsername,
   defaultRole,
 }: {
   children: ReactNode;
+  loginMethod: string | null;
+  bind: boolean;
+  lastCreateAt: string | null;
   defaultUsername: string | null;
   defaultRole: string | null;
 }) => {
   const [username, setUsername] = useState<string | null>(defaultUsername);
   const [role, setRole] = useState<string | null>(defaultRole);
+  const [method, setLoginMethod] = useState<string | null>(loginMethod);
+  const [isBind, setIsBind] = useState<boolean>(bind);
+  const [createDate, setCreateDate] = useState<string | null>(lastCreateAt);
 
   return (
-    <UserContext.Provider value={{ username, role, setUsername, setRole }}>
+    <UserContext.Provider
+      value={{
+        username,
+        role,
+        method,
+        isBind,
+        createDate,
+        setUsername,
+        setRole,
+        setLoginMethod,
+        setCreateDate,
+        setIsBind,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

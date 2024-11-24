@@ -15,6 +15,9 @@ export async function POST(req: NextRequest) {
       username: payload.username || null,
       displayName: payload.displayName || null,
       role: payload.role,
+      loginMethod: payload.loginMethod,
+      isBind: payload.isBind,
+      createAt: payload.createAt,
     });
   } catch (error) {
     return NextResponse.json({ message: "JWT 驗證失敗", status: 401 });
