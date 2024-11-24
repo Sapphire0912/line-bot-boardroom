@@ -2,9 +2,13 @@
 
 ### 11.25
 
+- 完成帳號綁定功能
+- 完成 boardroom 的模板
+
 ### 11.24
 
-- 完成 profile 基本資料區塊
+- 新增 route response, jwt, header 資訊
+- 完成 profile 基本資料區塊(含 CSS)
 
 ### 11.22
 
