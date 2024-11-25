@@ -39,7 +39,7 @@ const UserSchema: Schema<UserDocument> = new Schema<UserDocument>({
     maxLength: 20,
     unique: true,
   },
-  password: { type: String, required: true, minLength: 8, maxLength: 20 },
+  password: { type: String, required: true, minLength: 8 },
   lineid: { type: String, default: null },
   role: { type: String, enum: ["user", "admin"], default: "user" },
   createAt: { type: String, default: () => convtoTWDate(new Date()) },
