@@ -8,6 +8,21 @@ const profile = () => {
   const { username, role, method, isBind, createDate } = useUser();
   const router = useRouter();
 
+  const handleButton = (method: string | null) => {
+    switch (method) {
+      case "Line":
+        router.push("/boardroom/profile/bind/local");
+        break;
+
+      case "local":
+        router.push(`/api/auth/line?state=bind:${username}`);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <div className="w-[80%] p-2 bg-slate-100 shadow-[4px_0px_6px_rgba(0,0,0,0.25),-4px_0px_6px_rgba(0,0,0,0.25)]">
       <h1 className="font-bold text-3xl flex justify-center items-center pt-2 pb-2">
@@ -27,13 +42,7 @@ const profile = () => {
         {isBind || (
           <button
             type="button"
-            onClick={() =>
-              router.push(
-                `/boardroom/profile/bind/${
-                  method === "Line" ? "local" : "line"
-                }`
-              )
-            }
+            onClick={() => handleButton(method)}
             className="font-bold text-white bg-blue-500 border border-transparent p-2 mt-1 mb-1 rounded-2xl text-lg hover:border hover:border-blue-500 hover:text-black hover:bg-white"
           >
             綁定{method === "Line" ? "本地" : "Line"}帳號

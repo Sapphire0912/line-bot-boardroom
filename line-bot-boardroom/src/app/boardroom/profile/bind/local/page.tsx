@@ -4,9 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { accountBind } from "@/services/accountbind";
-import { useRouter } from "next/navigation";
 import { useUser } from "@/context/UserContext";
-import { BsWindowSidebar } from "react-icons/bs";
 
 const BindLogin = () => {
   const inputStyle: string = "w-full outline-none bg-transparent";
@@ -27,7 +25,6 @@ const BindLogin = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const router = useRouter();
   const formSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
