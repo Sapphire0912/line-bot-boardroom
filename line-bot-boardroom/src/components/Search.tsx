@@ -1,11 +1,20 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 const Search = () => {
+  /* 處理前端狀態邏輯與事件處理 */
+  const [searchText, setSearchText] = useState<string>("");
+
   const searchSumbit = (e: React.FormEvent) => {
     e.preventDefault();
+    // 剩下後端邏輯
   };
+
+  const searchFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+  };
+  /* End. */
 
   return (
     <form
@@ -20,6 +29,8 @@ const Search = () => {
         type="text"
         placeholder="搜尋(例如: @使用者或是文字內容)"
         className="flex-grow outline-none bg-transparent"
+        value={searchText}
+        onChange={searchFormChange}
       />
 
       <button
