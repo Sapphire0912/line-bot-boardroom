@@ -136,7 +136,7 @@ export async function GET(req: Request) {
         pictureUrl: isExistUser.pictureUrl,
         role: isExistUser.role,
         loginMethod: "Line",
-        isBind: isExistUser.localusername ? true : false, // 判斷是否連結本地帳號
+        isBind: false,
         createAt: isExistUser.createAt,
       });
 
