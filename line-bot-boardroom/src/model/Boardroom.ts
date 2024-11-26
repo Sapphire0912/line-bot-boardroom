@@ -23,12 +23,17 @@ export interface BoardInterface extends Document {
 }
 
 const BoardroomSchema: Schema<BoardInterface> = new Schema<BoardInterface>({
-  username: { type: String, required: true },
-  displayName: { type: String, required: true },
+  username: { type: String },
+  displayName: { type: String },
   message: { type: String, required: true },
   postDate: { type: String, default: () => convtoTWDate(new Date()) },
   updateDate: { type: String, default: () => convtoTWDate(new Date()) },
 });
+
+// 自訂義驗證邏輯
+BoardroomSchema.path("username").validate(function () {
+  return this.username || this.displayName;
+}, "username 與 displayName 至少需要一個存在");
 
 // 匯出 Boardroom model
 const Boardroom: Model<BoardInterface> =

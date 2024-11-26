@@ -17,6 +17,22 @@ const convtoTWDate = (date: Date) => {
   }).format(date);
 };
 
+export async function GET(req: Request) {
+  try {
+    await connectMongoDB();
+    const data = await Boardroom.find().sort({ postDate: 1 }); // 資料按日期遞增排列
+
+    return NextResponse.json({
+      message: "抓取留言板資料成功",
+      data,
+      status: 200,
+    });
+  } catch (error) {
+    console.log("抓取留言板資料失敗, ", error);
+    return NextResponse.json({ message: "抓取留言板資料失敗", status: 500 });
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const { username, displayName, userMsg } = await req.json();

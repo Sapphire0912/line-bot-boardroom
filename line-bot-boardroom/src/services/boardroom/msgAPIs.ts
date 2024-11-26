@@ -1,7 +1,7 @@
 export const messageAPIs = async (data: {
   username: string | null;
   displayName: string | null;
-  userMsg: string;
+  userMsg: string | null;
   method: string;
 }) => {
   const { username, displayName, userMsg, method } = data;
@@ -12,6 +12,18 @@ export const messageAPIs = async (data: {
   switch (method) {
     case "GET":
       /* 提供給留言板顯示所有留言使用, search 是使用者查詢的 req */
+      try {
+        const response = await fetch("/api/boardroom/message", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const info = await response.json();
+        return { message: info.message, data: info.data, status: info.status };
+      } catch (error) {
+        return { message: "留言板無法取得資訊", status: 404 };
+      }
       break;
 
     case "POST":

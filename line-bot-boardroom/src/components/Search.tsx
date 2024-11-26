@@ -2,7 +2,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
-const Search = () => {
+interface SubmitProps {
+  isSubmit: (flag: boolean) => void;
+}
+
+const Search: React.FC<SubmitProps> = ({ isSubmit }) => {
   /* 處理前端狀態邏輯與事件處理 */
   const [searchText, setSearchText] = useState<string>("");
 

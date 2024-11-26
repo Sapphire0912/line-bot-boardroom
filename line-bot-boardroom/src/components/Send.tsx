@@ -4,7 +4,11 @@ import Image from "next/image";
 import { useUser } from "@/context/UserContext";
 import { messageAPIs } from "@/services/boardroom/msgAPIs";
 
-const Send = () => {
+interface SubmitProps {
+  isSubmit: (flag: boolean) => void;
+}
+
+const Send: React.FC<SubmitProps> = ({ isSubmit }) => {
   const { username, displayName } = useUser();
 
   /* 處理前端狀態邏輯與事件處理 */
@@ -26,6 +30,7 @@ const Send = () => {
     setStatus(response?.status);
     setMessage(""); // 清空 form
     setHintAnime(true);
+    isSubmit(true);
 
     // 只顯示成功訊息 2 秒鐘
     setTimeout(() => {
@@ -38,7 +43,6 @@ const Send = () => {
   const sendInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
-
   /* End. */
 
   return (
