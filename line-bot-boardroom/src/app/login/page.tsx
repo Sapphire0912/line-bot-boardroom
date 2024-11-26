@@ -46,7 +46,7 @@ const Login = () => {
   return (
     <div className="2xl:w-1/3 xl:w-1/2 lg:w-[60%] md:w-[70%] w-[90%] h-1/2 border border-gray-500 rounded-xl p-6 bg-slate-200 shadow-2xl">
       <h3 className="font-bold text-2xl text-center p-2">登入留言板</h3>
-      <form onSubmit={formSubmit}>
+      <form onSubmit={formSubmit} method="POST">
         <div className="flex-col p-2">
           <label htmlFor="account" className={labelStyle}>
             使用者帳號

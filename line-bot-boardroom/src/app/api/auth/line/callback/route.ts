@@ -100,6 +100,7 @@ export async function GET(req: Request) {
       response.cookies.delete("token");
 
       const token = generateToken({
+        username: isLocalUser.username,
         lineid: userId,
         displayName: displayName,
         pictureUrl: pictureUrl,
@@ -131,6 +132,7 @@ export async function GET(req: Request) {
 
       // 生成 JWT
       const token = generateToken({
+        username: null,
         lineid: isExistUser.lineid,
         displayName: isExistUser.displayName,
         pictureUrl: isExistUser.pictureUrl,

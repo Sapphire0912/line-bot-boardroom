@@ -26,7 +26,7 @@ const BoardTitle = () => {
   /* End. */
 
   // 取得 user context API 資訊
-  const { username, role, setUsername, setRole } = useUser();
+  const { username, displayName, isBind, method } = useUser();
 
   return (
     <div className="p-4 border-b-2 border-slate-400 bg-slate-200 flex items-center justify-between">
@@ -36,6 +36,7 @@ const BoardTitle = () => {
           alt="boardroom"
           height={48}
           width={48}
+          priority
         />
         <h1 className="pl-1 pr-1 text-3xl font-bold text-green-500 text-center">
           LINE 留言板
@@ -49,7 +50,7 @@ const BoardTitle = () => {
             href="/boardroom/profile"
             className="underline hover:text-blue-800"
           >
-            {username}
+            {method === "Line" ? displayName : username}
           </Link>
         </span>
 

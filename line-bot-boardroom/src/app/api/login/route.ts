@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "@/lib/dbconnect";
-import User from "@/model/User";
 import { generateToken } from "@/lib/jwt";
+import User from "@/model/User";
+import LineUser from "@/model/LineUser";
 
 export async function POST(req: Request) {
   try {
@@ -14,10 +15,22 @@ export async function POST(req: Request) {
     if (!isExistUser || !(await isExistUser.comparePassword(password)))
       return NextResponse.json({ message: "帳號或密碼錯誤", status: 401 });
 
+    // 判斷使用者是否綁定
+    const isBind = isExistUser.lineid !== null;
+    let displayName = null;
+
+    if (isBind) {
+      const isLineUser = await LineUser.findOne({
+        localaccount: account,
+      }).exec();
+      if (isLineUser) displayName = isLineUser.displayName;
+    }
+
     // 回傳 JWT token
     const jwt_token = generateToken({
       id: isExistUser._id,
       username: isExistUser.username,
+      displayName,
       account: isExistUser.account,
       role: isExistUser.role,
       loginMethod: "local",
@@ -29,6 +42,7 @@ export async function POST(req: Request) {
       message: "登入成功",
       token: jwt_token,
       username: isExistUser.username,
+      displayName,
       account: isExistUser.account,
       role: isExistUser.role,
       loginMethod: "local",

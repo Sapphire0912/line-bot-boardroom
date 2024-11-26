@@ -5,7 +5,7 @@ import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 
 const profile = () => {
-  const { username, role, method, isBind, createDate } = useUser();
+  const { username, displayName, role, method, isBind, createDate } = useUser();
   const router = useRouter();
 
   const handleButton = (method: string | null) => {
@@ -29,7 +29,9 @@ const profile = () => {
         基本資料
       </h1>
       <div className="pl-4 pr-4">
-        <p className="font-bold text-xl pt-1 pb-1">使用者名稱:{username}</p>
+        <p className="font-bold text-xl pt-1 pb-1">
+          使用者名稱:{method === "Line" ? displayName : username}
+        </p>
         <p className="text-lg pt-1 pb-1">創建時間: {createDate}</p>
         <p className="text-lg pt-1 pb-1">
           權限: {`${role === "admin" ? "管理員" : "使用者"}`}
@@ -37,7 +39,9 @@ const profile = () => {
         <p className="text-lg pt-1 pb-1">登入方式: {method}</p>
         <p className="text-lg pt-1 pb-1">
           是否綁定{method === "Line" ? "本地" : "Line"}帳號:&nbsp;
-          {isBind ? "已綁定" : "未綁定"}
+          {isBind
+            ? `已綁定(${method === "Line" ? username : displayName})`
+            : "未綁定"}
         </p>
         {isBind || (
           <button

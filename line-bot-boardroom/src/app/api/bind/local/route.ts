@@ -49,12 +49,13 @@ export async function POST(req: NextRequest) {
     response.cookies.delete("token");
 
     const token = generateToken({
+      username: isLocalUser.username,
       lineid: isLineUser.lineid,
       displayName: isLineUser.displayName,
       pictureUrl: isLineUser.pictureUrl,
       role: isLineUser.role,
       loginMethod: "Line",
-      isBind: isLineUser.localusername ? true : false, // 判斷是否連結本地帳號
+      isBind: true,
       createAt: isLineUser.createAt,
     });
 
