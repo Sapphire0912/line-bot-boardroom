@@ -34,7 +34,7 @@ const profile = () => {
         </p>
         <p className="text-lg pt-1 pb-1">創建時間: {createDate}</p>
         <p className="text-lg pt-1 pb-1">
-          權限: {`${role === "admin" ? "管理員" : "使用者"}`}
+          身分: {`${role === "admin" ? "管理員" : "使用者"}`}
         </p>
         <p className="text-lg pt-1 pb-1">登入方式: {method}</p>
         <p className="text-lg pt-1 pb-1">

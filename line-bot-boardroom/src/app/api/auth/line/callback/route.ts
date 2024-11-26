@@ -120,6 +120,7 @@ export async function GET(req: Request) {
 
       return response;
     } else {
+      // 登入邏輯
       let isExistUser = await LineUser.findOne({ lineid: userId });
       if (!isExistUser) {
         // 儲存新使用者
@@ -130,15 +131,27 @@ export async function GET(req: Request) {
         });
       }
 
+      // 檢查是否已綁定本地帳號
+      const localusername = isExistUser.localusername;
+      const localaccount = isExistUser.localaccount;
+
+      const isLocalUser = await User.findOne({
+        username: localusername,
+        account: localaccount,
+      });
+
+      let username = null;
+      if (isLocalUser) username = isLocalUser.username;
+
       // 生成 JWT
       const token = generateToken({
-        username: null,
+        username,
         lineid: isExistUser.lineid,
         displayName: isExistUser.displayName,
         pictureUrl: isExistUser.pictureUrl,
         role: isExistUser.role,
         loginMethod: "Line",
-        isBind: false,
+        isBind: username !== null,
         createAt: isExistUser.createAt,
       });
 
