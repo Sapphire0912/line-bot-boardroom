@@ -17,17 +17,17 @@
 
 - **Node.js**
 - **Javascript/Typescript**
-- **Socket.io**
 - **MongoDB**
 
 ### 其他
 
 - **Line Message API**
 - **Line Login**
+- **Firebase**
 - **Vercel**
 
 ## 時程
 
 - **開發人數：1 人**
 - **開始時間：2024.11.18**
-- **更新時間：2024.11.24**
+- **更新時間：2024.11.27**

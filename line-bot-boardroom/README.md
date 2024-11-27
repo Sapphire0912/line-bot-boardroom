@@ -4,6 +4,7 @@
 
 - 修正 boardroom css 樣式
 - 新增 admin page 控制頁面
+- 實踐 firebase 同步留言板訊息
 
 ### 11.26
 
