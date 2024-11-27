@@ -22,7 +22,7 @@ const Search: React.FC<SubmitProps> = ({ isSubmit }) => {
 
   return (
     <form
-      className="flex items-center p-1 bg-white border border-blue-300"
+      className="flex items-center m-1 p-1 bg-white border border-blue-300"
       onSubmit={searchSumbit}
     >
       <span className="bg-white p-1 mr-1">
