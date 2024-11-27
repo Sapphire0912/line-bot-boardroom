@@ -41,7 +41,7 @@ const userPage = () => {
 
   if (!data || data.length === 0) {
     return (
-      <section className="w-[80%] min-h-full">
+      <section className="w-[80%] min-h-full flex flex-col">
         <div className="min-h-full">
           <Search isSubmit={setFlag} />
           <p className="text-lg">
@@ -54,21 +54,29 @@ const userPage = () => {
   }
 
   return (
-    <section className="w-[80%] min-h-full">
-      <div className="min-h-full">
-        <Search isSubmit={setFlag} />
-        {data.map((content, index) => (
-          <BoardContent
-            key={`${index}`}
-            username={content.username}
-            displayName={content.displayName}
-            userMsg={content.message}
-            postDate={content.postDate}
-            updateDate={content.updateDate}
-          />
-        ))}
+    <section className="w-[80%] min-h-screen flex flex-col">
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <div>
+          <Search isSubmit={setFlag} />
+        </div>
+
+        <div className="flex-1 overflow-y-auto">
+          {data.map((content, index) => (
+            <BoardContent
+              key={`${index}`}
+              username={content.username}
+              displayName={content.displayName}
+              userMsg={content.message}
+              postDate={content.postDate}
+              updateDate={content.updateDate}
+            />
+          ))}
+        </div>
+
+        <div>
+          <Send isSubmit={setFlag} />
+        </div>
       </div>
-      <Send isSubmit={setFlag} />
     </section>
   );
 };

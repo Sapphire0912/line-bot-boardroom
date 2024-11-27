@@ -57,24 +57,30 @@ const adminPage = () => {
 
   return (
     <section className="w-full flex m-2">
-      <div className="member-div flex-1 border border-black">
-        Member section
-      </div>
-      <div className="boardroom-div flex-1">
-        <div className="min-h-full">
-          <Search isSubmit={setFlag} />
-          {data.map((content, index) => (
-            <BoardContent
-              key={`${index}`}
-              username={content.username}
-              displayName={content.displayName}
-              userMsg={content.message}
-              postDate={content.postDate}
-              updateDate={content.updateDate}
-            />
-          ))}
+      <div className="flex-1 border border-black">Member section</div>
+      <div className="flex-1">
+        <div className="min-h-screen flex flex-col">
+          <div>
+            <Search isSubmit={setFlag} />
+          </div>
+
+          <div className="flex-1 overflow-y-auto">
+            {data.map((content, index) => (
+              <BoardContent
+                key={`${index}`}
+                username={content.username}
+                displayName={content.displayName}
+                userMsg={content.message}
+                postDate={content.postDate}
+                updateDate={content.updateDate}
+              />
+            ))}
+          </div>
+
+          <div>
+            <Send isSubmit={setFlag} />
+          </div>
         </div>
-        <Send isSubmit={setFlag} />
       </div>
     </section>
   );

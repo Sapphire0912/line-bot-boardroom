@@ -57,7 +57,7 @@ const Send: React.FC<SubmitProps> = ({ isSubmit }) => {
         </p>
       )}
       <form
-        className="flex items-center p-1 bg-white border border-blue-300"
+        className="flex items-center m-1 p-1 bg-white border border-blue-300"
         onSubmit={sendSumbit}
       >
         <span className="bg-white p-1 mr-1">

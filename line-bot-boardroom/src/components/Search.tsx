@@ -31,7 +31,7 @@ const Search: React.FC<SubmitProps> = ({ isSubmit }) => {
 
       <input
         type="text"
-        placeholder="搜尋(例如: @使用者或是文字內容)"
+        placeholder="搜尋(@使用者或是文字內容)"
         className="flex-grow outline-none bg-transparent"
         value={searchText}
         onChange={searchFormChange}
