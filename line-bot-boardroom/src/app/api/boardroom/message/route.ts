@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { connectMongoDB } from "@/lib/dbconnect";
 import Boardroom from "@/model/Boardroom";
+import { sendMsgToFirebase } from "@/lib/firebaseFunction"; // 將留言也寫入 firebase 內部
 
 // 處理張貼日期的函數
 const convtoTWDate = (date: Date) => {
@@ -39,11 +40,20 @@ export async function POST(req: Request) {
 
     await connectMongoDB();
 
-    await Boardroom.create({
+    const localEntry = await Boardroom.create({
       username,
       displayName,
       message: userMsg,
       postDate: convtoTWDate(new Date()),
+    });
+
+    // 將留言寫入 firebase 內部
+    await sendMsgToFirebase({
+      username,
+      displayName,
+      message: userMsg,
+      postDate: localEntry.postDate,
+      updateDate: localEntry.updateDate,
     });
 
     return NextResponse.json({ message: "留言已成功送出", status: 201 });
