@@ -54,13 +54,13 @@ const userPage = () => {
   }
 
   return (
-    <section className="w-[80%] min-h-screen flex flex-col">
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div>
+    <section className="w-[80%] h-screen flex flex-col">
+      <div className="flex-1 flex flex-col overflow-hidden relative">
+        <div className="sticky top-0 z-10">
           <Search isSubmit={setFlag} />
         </div>
 
-        <div className="flex-1 overflow-y-auto">
+        <div className="h-full overflow-y-auto">
           {data.map((content, index) => (
             <BoardContent
               key={`${index}`}
@@ -73,7 +73,7 @@ const userPage = () => {
           ))}
         </div>
 
-        <div>
+        <div className="sticky bottom-0 z-10">
           <Send isSubmit={setFlag} />
         </div>
       </div>
