@@ -41,15 +41,24 @@ const adminPage = () => {
 
   if (!data || data.length === 0) {
     return (
-      <section className="w-full flex border-2 border-black m-6">
-        <div className="member-div flex-1 border-2 border-red-400">
-          Member section
-        </div>
-        <div className="boardroom-div flex-1 border-2 border-purple-900">
-          <div className="min-h-full">
-            <Search isSubmit={setFlag} />
+      <section className="w-full flex m-2">
+        <div className="flex-1">Member section</div>
+        <div className="flex-1">
+          <div className="min-h-screen flex flex-col">
+            <div>
+              <Search isSubmit={setFlag} />
+            </div>
+
+            <div className="flex-1">
+              <p className="text-lg">
+                {data === null ? "資料正在加載中..." : "目前尚無留言資料"}
+              </p>
+            </div>
+
+            <div>
+              <Send isSubmit={setFlag} />
+            </div>
           </div>
-          <Send isSubmit={setFlag} />
         </div>
       </section>
     );
