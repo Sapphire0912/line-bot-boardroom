@@ -25,7 +25,7 @@ const BoardContent = ({
       return <h3 className={`${nameStyle} p-1`}>{displayName}</h3>;
   };
   return (
-    <div className="border-b border-b-black m-1">
+    <div className="border-b border-b-black m-1 duration-300 hover:bg-slate-50">
       {handlePostName()}
       <p className="text-gray-600 p-0.5 text-xs">留言時間:{postDate}</p>
       {updateDate && updateDate !== postDate && (

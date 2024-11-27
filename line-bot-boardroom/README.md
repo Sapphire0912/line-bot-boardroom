@@ -3,7 +3,7 @@
 ### 11.27
 
 - 修正 boardroom css 樣式
-- 新增 admin page 控制頁面
+- 新增 admin page 成員頁面
 
 ### 11.26
 

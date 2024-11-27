@@ -24,7 +24,6 @@ export const messageAPIs = async (data: {
       } catch (error) {
         return { message: "留言板無法取得資訊", status: 404 };
       }
-      break;
 
     case "POST":
       try {
