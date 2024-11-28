@@ -42,10 +42,10 @@ export const messageAPIs = async (data: {
       }
 
     case "PATCH":
-      break;
+      return { message: "PATCH方法尚未實作", status: 500 };
 
     case "DELETE":
-      break;
+      return { message: "留言發送失敗", status: 500 };
 
     default:
       return { message: "請求方法錯誤", status: 404 };

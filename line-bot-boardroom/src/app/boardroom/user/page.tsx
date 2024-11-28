@@ -5,6 +5,7 @@ import Search from "@/components/Search";
 import Send from "@/components/Send";
 import BoardContent from "@/components/BoardContent";
 import { messageAPIs } from "@/services/boardroom/msgAPIs";
+import { searchAPI } from "@/services/boardroom/search";
 
 interface DataType {
   username: string | null;
@@ -14,11 +15,22 @@ interface DataType {
   updateDate: string | null;
 }
 
+interface SearchInfoType {
+  searchText: string;
+  searchType: string;
+}
+
 const userPage = () => {
-  const [flag, setFlag] = useState<boolean>(false); // 若送出與查詢操作需要重新渲染留言板
+  const [flag, setFlag] = useState<boolean>(false); // 若送出操作需要重新渲染留言板
+  const [searchInfo, setSearchInfo] = useState<SearchInfoType>({
+    searchText: "",
+    searchType: "",
+  }); // 若查詢操作需要呼叫 API
 
   /* 處理前端取得資料邏輯 */
   const [data, setData] = useState<DataType[] | null>(null);
+  const [hint, setHint] = useState<string>("");
+
   const getBoardData = async () => {
     const response = await messageAPIs({
       method: "GET",
@@ -26,27 +38,45 @@ const userPage = () => {
       displayName: null,
       userMsg: null,
     });
-    if (response?.status === 200) {
-      setData(response?.data);
+    if (response.status === 200) {
+      setData(response.data);
     } else {
-      setData(response?.message);
+      setData([]);
+      setHint(response.message);
+    }
+  };
+
+  const getSearchData = async () => {
+    const response = await searchAPI(
+      searchInfo.searchType,
+      searchInfo.searchText
+    );
+    if (response.status === 200) {
+      setData(response.targetData);
+    } else {
+      setData([]);
+      setHint(response.message);
     }
   };
   /* End. */
+
+  useEffect(() => {
+    if (searchInfo.searchText && searchInfo.searchType) {
+      getSearchData();
+    }
+  }, [searchInfo]);
 
   useEffect(() => {
     getBoardData();
     setFlag(false);
   }, [flag]);
 
-  if (!data || data.length === 0) {
+  if (!data) {
     return (
       <section className="w-[80%] min-h-full flex flex-col">
         <div className="min-h-full">
-          <Search isSubmit={setFlag} />
-          <p className="text-lg">
-            {data === null ? "資料正在加載中..." : "目前尚無留言資料"}
-          </p>
+          <Search isOperation={setSearchInfo} searchType="message" />
+          <p className="text-lg">資料正在加載中...</p>
         </div>
         <Send isSubmit={setFlag} />
       </section>
@@ -57,20 +87,24 @@ const userPage = () => {
     <section className="w-[80%] h-screen flex flex-col">
       <div className="flex-1 flex flex-col overflow-hidden relative">
         <div className="sticky top-0 z-10">
-          <Search isSubmit={setFlag} />
+          <Search isOperation={setSearchInfo} searchType="message" />
         </div>
 
         <div className="h-full overflow-y-auto">
-          {data.map((content, index) => (
-            <BoardContent
-              key={`${index}`}
-              username={content.username}
-              displayName={content.displayName}
-              userMsg={content.message}
-              postDate={content.postDate}
-              updateDate={content.updateDate}
-            />
-          ))}
+          {data.length !== 0 ? (
+            data.map((content, index) => (
+              <BoardContent
+                key={`${index}`}
+                username={content.username}
+                displayName={content.displayName}
+                userMsg={content.message}
+                postDate={content.postDate}
+                updateDate={content.updateDate}
+              />
+            ))
+          ) : (
+            <p className="text-lg p-1">{hint}</p>
+          )}
         </div>
 
         <div className="sticky bottom-0 z-10">

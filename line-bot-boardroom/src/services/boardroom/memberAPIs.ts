@@ -1,6 +1,6 @@
 export const memberAPIs = async (role: string) => {
   if (role !== "admin")
-    return { message: "僅限管理員可查詢成員資料", status: 401 };
+    return { message: "僅限管理員可查詢成員資料", memberData: [], status: 401 };
 
   try {
     const response = await fetch("/api/boardroom/member", {
@@ -10,6 +10,7 @@ export const memberAPIs = async (role: string) => {
       },
     });
     const info = await response.json();
+
     return {
       message: info.message,
       memberData: info.memberData,

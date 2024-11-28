@@ -39,6 +39,10 @@ export async function POST(req: Request) {
     });
   } catch (error) {
     console.error("抓取成員資料失敗, ", error);
-    return NextResponse.json({ message: "抓取成員資料失敗", status: 500 });
+    return NextResponse.json({
+      message: "抓取成員資料失敗",
+      memberData: [],
+      status: 500,
+    });
   }
 }
