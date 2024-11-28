@@ -4,7 +4,7 @@ import { generateState } from "@/lib/state_gen";
 const LINE_AUTH_URL = "https://access.line.me/oauth2/v2.1/authorize";
 
 export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url, "http://localhost:6543");
+  const { searchParams } = new URL(req.url, process.env.PUBLIC_URL);
   const bindUsername = searchParams.get("state");
 
   const state = bindUsername

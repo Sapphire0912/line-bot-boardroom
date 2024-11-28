@@ -29,7 +29,11 @@ export async function GET(req: Request) {
     });
   } catch (error) {
     console.log("抓取留言板資料失敗, ", error);
-    return NextResponse.json({ message: "抓取留言板資料失敗", status: 500 });
+    return NextResponse.json({
+      message: "抓取留言板資料失敗",
+      data: [],
+      status: 500,
+    });
   }
 }
 

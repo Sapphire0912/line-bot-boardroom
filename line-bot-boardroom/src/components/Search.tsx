@@ -1,18 +1,21 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 
 interface SubmitProps {
-  isSubmit: (flag: boolean) => void;
+  isOperation: (searchInfo: { searchText: string; searchType: string }) => void;
+  searchType: string;
 }
 
-const Search: React.FC<SubmitProps> = ({ isSubmit }) => {
+const Search: React.FC<SubmitProps> = ({ isOperation, searchType }) => {
   /* 處理前端狀態邏輯與事件處理 */
   const [searchText, setSearchText] = useState<string>("");
 
-  const searchSumbit = (e: React.FormEvent) => {
+  const searchSumbit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // 剩下後端邏輯
+    isOperation({ searchText, searchType }); // 傳送給 user/admin page 去呼叫 API
+    setSearchText("");
   };
 
   const searchFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +34,11 @@ const Search: React.FC<SubmitProps> = ({ isSubmit }) => {
 
       <input
         type="text"
-        placeholder="搜尋(@使用者或是文字內容)"
+        placeholder={
+          searchType === "member"
+            ? "輸入使用者名稱(不需@)"
+            : "搜尋(@使用者或是文字內容)"
+        }
         className="flex-grow outline-none bg-transparent"
         value={searchText}
         onChange={searchFormChange}

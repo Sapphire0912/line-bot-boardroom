@@ -1,5 +1,11 @@
 ## 開發進度
 
+### 11.28
+
+- 完成成員、留言搜尋功能
+- 調整 boardroom component 參數資訊
+- 調整 user/admin page 的模板頁面
+
 ### 11.27
 
 - 修正 boardroom css 樣式
