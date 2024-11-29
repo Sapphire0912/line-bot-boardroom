@@ -58,7 +58,7 @@ const adminPage = () => {
   const [memberData, setMemberData] = useState<MemberType[] | null>(null);
   const [memberHint, setMemberHint] = useState<string>("");
   const getMemberData = async () => {
-    const response = await memberAPIs("admin");
+    const response = await memberAPIs("admin", "POST");
     if (response.status === 200) {
       setMemberData(response.memberData);
     } else {
@@ -156,6 +156,7 @@ const adminPage = () => {
                 username={member.username}
                 displayName={member.displayName}
                 lineid={member.lineid}
+                isSubmit={setFlag}
               />
             ))
           ) : (

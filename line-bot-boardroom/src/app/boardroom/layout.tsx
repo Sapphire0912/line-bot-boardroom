@@ -28,7 +28,8 @@ export default async function BoardroomLayout({
   const isBind: boolean = headersList.get("isBind") === "true" ? true : false;
   const createAt = headersList.get("createAt");
   const loginMethod = headersList.get("loginMethod");
-  const lineid = headersList.get("lineid") || null;
+  const lineid =
+    headersList.get("lineid") !== "null" ? headersList.get("lineid") : null;
 
   if (!username && !displayName) {
     return (
