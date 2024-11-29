@@ -12,6 +12,7 @@ import Members from "@/components/Members";
 interface DataType {
   username: string | null;
   displayName: string | null;
+  lineid: string | null;
   message: string;
   postDate: string;
   updateDate: string | null;
@@ -42,6 +43,7 @@ const adminPage = () => {
       method: "GET",
       username: null,
       displayName: null,
+      lineid: null,
       userMsg: null,
     });
     if (response.status === 200) {

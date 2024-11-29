@@ -10,6 +10,7 @@ import { searchAPI } from "@/services/boardroom/search";
 interface DataType {
   username: string | null;
   displayName: string | null;
+  lineid: string | null;
   message: string;
   postDate: string;
   updateDate: string | null;
@@ -36,6 +37,7 @@ const userPage = () => {
       method: "GET",
       username: null,
       displayName: null,
+      lineid: null,
       userMsg: null,
     });
     if (response.status === 200) {

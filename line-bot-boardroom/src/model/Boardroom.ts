@@ -17,6 +17,7 @@ const convtoTWDate = (date: Date) => {
 export interface BoardInterface extends Document {
   username: string;
   displayName: string;
+  lineid: string;
   message: string;
   postDate: string;
   updateDate: string;
@@ -24,7 +25,8 @@ export interface BoardInterface extends Document {
 
 const BoardroomSchema: Schema<BoardInterface> = new Schema<BoardInterface>({
   username: { type: String },
-  displayName: { type: String },
+  displayName: { type: String, default: null },
+  lineid: { type: String, default: null },
   message: { type: String, required: true },
   postDate: { type: String, default: () => convtoTWDate(new Date()) },
   updateDate: { type: String, default: () => convtoTWDate(new Date()) },
@@ -34,6 +36,11 @@ const BoardroomSchema: Schema<BoardInterface> = new Schema<BoardInterface>({
 BoardroomSchema.path("username").validate(function () {
   return this.username || this.displayName;
 }, "username 與 displayName 至少需要一個存在");
+
+BoardroomSchema.path("displayName").validate(function () {
+  if (this.displayName && !this.lineid) return false;
+  return true;
+}, "如果有 displayName 就並須有 line id 欄位");
 
 // 匯出 Boardroom model
 const Boardroom: Model<BoardInterface> =

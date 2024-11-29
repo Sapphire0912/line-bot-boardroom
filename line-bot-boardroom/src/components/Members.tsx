@@ -18,6 +18,7 @@ const Members = ({
     if (displayName)
       return <h3 className={`${nameStyle} p-1`}>{displayName}</h3>;
   };
+  // 需要新增 lineid 欄位
   return (
     <div className="flex border border-gray-400 justify-between items-center m-2 pt-1 pb-1 pl-4 pr-4 bg-white rounded-lg duration-300 hover:bg-cyan-100">
       {handleMemberName()}

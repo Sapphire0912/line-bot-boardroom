@@ -3,6 +3,7 @@
 import React, { createContext, useContext, ReactNode, useState } from "react";
 
 interface UserContextType {
+  lineid: string | null;
   username: string | null;
   displayName: string | null;
   role: string | null;
@@ -15,6 +16,7 @@ interface UserContextType {
   setCreateDate: (createDate: string | null) => void;
   setIsBind: (isBind: boolean) => void;
   setDisplayName: (displayName: string | null) => void;
+  setLineID: (lineid: string | null) => void;
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined); // 默認值
@@ -28,6 +30,7 @@ export const UserProvider = ({
   defaultUsername,
   defaultDisplayName,
   defaultRole,
+  isLineId,
 }: {
   children: ReactNode;
   loginMethod: string | null;
@@ -36,12 +39,13 @@ export const UserProvider = ({
   defaultUsername: string | null;
   defaultDisplayName: string | null;
   defaultRole: string | null;
+  isLineId: string | null;
 }) => {
   const [username, setUsername] = useState<string | null>(defaultUsername);
   const [displayName, setDisplayName] = useState<string | null>(
     defaultDisplayName
   );
-
+  const [lineid, setLineID] = useState<string | null>(isLineId);
   const [role, setRole] = useState<string | null>(defaultRole);
   const [method, setLoginMethod] = useState<string | null>(loginMethod);
   const [isBind, setIsBind] = useState<boolean>(bind);
@@ -52,6 +56,7 @@ export const UserProvider = ({
       value={{
         username,
         displayName,
+        lineid,
         role,
         method,
         isBind,
@@ -62,6 +67,7 @@ export const UserProvider = ({
         setCreateDate,
         setIsBind,
         setDisplayName,
+        setLineID,
       }}
     >
       {children}

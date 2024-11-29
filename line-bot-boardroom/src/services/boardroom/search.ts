@@ -21,7 +21,7 @@ export const searchAPI = async (searchType: string, content: string) => {
       status: info.status,
     };
   } catch (error) {
-    console.log("search API 出現錯誤, error", error);
+    console.log("search API 出現錯誤, ", error);
     return { message: "搜尋失敗", status: 500 };
   }
 };

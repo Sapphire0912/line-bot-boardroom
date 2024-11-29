@@ -24,6 +24,7 @@ const BoardContent = ({
     if (displayName)
       return <h3 className={`${nameStyle} p-1`}>{displayName}</h3>;
   };
+  // 可再考慮 displayName 重複時，是否需要新增 lineid 欄位
   return (
     <div className="border-b border-b-black m-1 duration-300 hover:bg-slate-50">
       {handlePostName()}

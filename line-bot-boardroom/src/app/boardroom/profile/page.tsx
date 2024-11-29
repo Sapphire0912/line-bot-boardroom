@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import MsgRecord from "@/components/MsgRecord";
 
 const profile = () => {
-  const { username, displayName, role, method, isBind, createDate } = useUser();
+  const { username, displayName, lineid, role, method, isBind, createDate } =
+    useUser();
   const router = useRouter();
 
   const handleButton = (method: string | null) => {
@@ -65,7 +66,11 @@ const profile = () => {
       <h1 className="font-bold text-3xl flex justify-center items-center pt-2 pb-2">
         留言紀錄
       </h1>
-      <MsgRecord username={username} displayName={displayName} />
+      <MsgRecord
+        username={username}
+        displayName={displayName}
+        lineid={lineid}
+      />
     </div>
   );
 };
