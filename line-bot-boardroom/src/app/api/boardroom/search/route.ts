@@ -51,6 +51,7 @@ export async function GET(req: Request) {
         let targetData: Array<object> = [];
         for (const user of isLineUser) {
           targetData.push({
+            lineid: user.lineid,
             username: user.localusername || null,
             displayName: user.displayName,
           });

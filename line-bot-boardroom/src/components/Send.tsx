@@ -9,7 +9,7 @@ interface SubmitProps {
 }
 
 const Send: React.FC<SubmitProps> = ({ isSubmit }) => {
-  const { username, displayName } = useUser();
+  const { username, displayName, lineid } = useUser();
 
   /* 處理前端狀態邏輯與事件處理 */
   const [message, setMessage] = useState<string>("");
@@ -22,6 +22,7 @@ const Send: React.FC<SubmitProps> = ({ isSubmit }) => {
     const response = await messageAPIs({
       username,
       displayName,
+      lineid,
       userMsg: message,
       method: "POST",
     });

@@ -10,6 +10,7 @@ import { searchAPI } from "@/services/boardroom/search";
 interface DataType {
   username: string | null;
   displayName: string | null;
+  lineid: string | null;
   message: string;
   postDate: string;
   updateDate: string | null;
@@ -36,6 +37,7 @@ const userPage = () => {
       method: "GET",
       username: null,
       displayName: null,
+      lineid: null,
       userMsg: null,
     });
     if (response.status === 200) {
@@ -84,13 +86,13 @@ const userPage = () => {
   }
 
   return (
-    <section className="w-[80%] h-screen flex flex-col">
-      <div className="flex-1 flex flex-col overflow-hidden relative">
+    <section className="w-[80%] min-h-screen flex flex-col">
+      <div className="h-full flex flex-col">
         <div className="sticky top-0 z-10">
           <Search isOperation={setSearchInfo} searchType="message" />
         </div>
 
-        <div className="h-full overflow-y-auto">
+        <div className="flex-1 overflow-y-auto">
           {data.length !== 0 ? (
             data.map((content, index) => (
               <BoardContent

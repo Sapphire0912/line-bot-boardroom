@@ -18,12 +18,16 @@ export async function POST(req: Request) {
     // 判斷使用者是否綁定
     const isBind = isExistUser.lineid !== null;
     let displayName = null;
+    let lineid = null;
 
     if (isBind) {
       const isLineUser = await LineUser.findOne({
         localaccount: account,
       }).exec();
-      if (isLineUser) displayName = isLineUser.displayName;
+      if (isLineUser) {
+        displayName = isLineUser.displayName;
+        lineid = isLineUser.lineid;
+      }
     }
 
     // 回傳 JWT token
@@ -31,6 +35,7 @@ export async function POST(req: Request) {
       id: isExistUser._id,
       username: isExistUser.username,
       displayName,
+      lineid,
       account: isExistUser.account,
       role: isExistUser.role,
       loginMethod: "local",

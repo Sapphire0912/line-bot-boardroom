@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Search from "@/components/Search";
 import Send from "@/components/Send";
 import BoardContent from "@/components/BoardContent";
@@ -12,6 +13,7 @@ import Members from "@/components/Members";
 interface DataType {
   username: string | null;
   displayName: string | null;
+  lineid: string | null;
   message: string;
   postDate: string;
   updateDate: string | null;
@@ -20,6 +22,7 @@ interface DataType {
 interface MemberType {
   username: string | null;
   displayName: string | null;
+  lineid: string | null;
 }
 interface SearchInfoType {
   searchText: string;
@@ -42,6 +45,7 @@ const adminPage = () => {
       method: "GET",
       username: null,
       displayName: null,
+      lineid: null,
       userMsg: null,
     });
     if (response.status === 200) {
@@ -55,7 +59,7 @@ const adminPage = () => {
   const [memberData, setMemberData] = useState<MemberType[] | null>(null);
   const [memberHint, setMemberHint] = useState<string>("");
   const getMemberData = async () => {
-    const response = await memberAPIs("admin");
+    const response = await memberAPIs("admin", "POST");
     if (response.status === 200) {
       setMemberData(response.memberData);
     } else {
@@ -131,10 +135,9 @@ const adminPage = () => {
   }
 
   return (
-    // 需要 RWD
-    <section className="w-full flex m-2">
-      <div className="min-h-screen w-[30%] border-2 border-slate-400 rounded-lg bg-slate-100">
-        <div className="flex flex-col w-full pl-1 pr-1 border-2 border-red-200">
+    <section className="w-full flex flex-col items-center mt-4 lg:m-2 lg:flex-row">
+      <div className="w-[90%] h-[40%] mb-6 lg:mb-0 lg:w-[40%] lg:min-h-screen border-2 border-slate-400 rounded-lg bg-slate-100">
+        <div className="flex flex-col w-full pl-1 pr-1 mr-1 ">
           <p className="text-xl font-bold pl-1">
             留言板成員總數：{memberData.length} 人
           </p>
@@ -152,6 +155,8 @@ const adminPage = () => {
                 }-${index}`}
                 username={member.username}
                 displayName={member.displayName}
+                lineid={member.lineid}
+                isSubmit={setFlag}
               />
             ))
           ) : (
@@ -159,7 +164,7 @@ const adminPage = () => {
           )}
         </div>
       </div>
-      <div className="w-[70%]">
+      <div className="w-[90%]">
         <div className="min-h-screen flex flex-col">
           <div className="sticky top-0 z-10">
             <Search isOperation={setSearchInfo} searchType="message" />

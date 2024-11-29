@@ -25,7 +25,7 @@ const Search: React.FC<SubmitProps> = ({ isOperation, searchType }) => {
 
   return (
     <form
-      className="flex items-center m-1 p-1 bg-white border border-blue-300"
+      className="flex gap-2 items-center m-1 p-1 bg-white border border-blue-300 "
       onSubmit={searchSumbit}
     >
       <span className="bg-white p-1 mr-1">
@@ -39,14 +39,14 @@ const Search: React.FC<SubmitProps> = ({ isOperation, searchType }) => {
             ? "輸入使用者名稱(不需@)"
             : "搜尋(@使用者或是文字內容)"
         }
-        className="flex-grow outline-none bg-transparent"
+        className="flex-grow max-w-full outline-none bg-transparent"
         value={searchText}
         onChange={searchFormChange}
       />
 
       <button
         type="submit"
-        className="font-bold pl-3 pr-3 pt-1 pb-1 mr-1 border-2 border-blue-200 bg-blue-500 rounded-3xl text-white"
+        className="font-bold pl-3 pr-3 pt-1 pb-1 mr-1 border-2 border-blue-200 bg-blue-500 rounded-3xl text-white flex-shrink-0"
       >
         搜尋
       </button>

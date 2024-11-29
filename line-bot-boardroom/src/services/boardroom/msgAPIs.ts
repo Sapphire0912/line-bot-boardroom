@@ -1,10 +1,11 @@
 export const messageAPIs = async (data: {
   username: string | null;
   displayName: string | null;
+  lineid: string | null;
   userMsg: string | null;
   method: string;
 }) => {
-  const { username, displayName, userMsg, method } = data;
+  const { username, displayName, lineid, userMsg, method } = data;
 
   if (!userMsg && method !== "GET")
     return { message: "留言欄位不可為空", status: 400 };
@@ -32,7 +33,7 @@ export const messageAPIs = async (data: {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username, displayName, userMsg }),
+          body: JSON.stringify({ username, displayName, lineid, userMsg }),
         });
         const info = await response.json();
         return { message: info.message, status: info.status };

@@ -3,9 +3,11 @@
 import React from "react";
 import { useUser } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import MsgRecord from "@/components/MsgRecord";
 
 const profile = () => {
-  const { username, displayName, role, method, isBind, createDate } = useUser();
+  const { username, displayName, lineid, role, method, isBind, createDate } =
+    useUser();
   const router = useRouter();
 
   const handleButton = (method: string | null) => {
@@ -47,17 +49,28 @@ const profile = () => {
           <button
             type="button"
             onClick={() => handleButton(method)}
-            className="font-bold text-white bg-blue-500 border border-transparent p-2 mt-1 mb-1 rounded-2xl text-lg hover:border hover:border-blue-500 hover:text-black hover:bg-white"
+            className="font-bold text-white bg-blue-500 border border-transparent p-2 mt-1 mb-1 mr-4 rounded-2xl text-lg hover:border hover:border-blue-500 hover:text-black hover:bg-white"
           >
             綁定{method === "Line" ? "本地" : "Line"}帳號
           </button>
         )}
+        <button
+          type="button"
+          onClick={() => router.push(`/boardroom/${role}`)}
+          className="font-bold text-white bg-green-700 border border-transparent p-2 mt-1 mb-1 rounded-2xl text-lg hover:border hover:border-green-700 hover:text-black hover:bg-white"
+        >
+          返回留言板
+        </button>
       </div>
 
       <h1 className="font-bold text-3xl flex justify-center items-center pt-2 pb-2">
         留言紀錄
       </h1>
-      {/* 需要 content grid format */}
+      <MsgRecord
+        username={username}
+        displayName={displayName}
+        lineid={lineid}
+      />
     </div>
   );
 };

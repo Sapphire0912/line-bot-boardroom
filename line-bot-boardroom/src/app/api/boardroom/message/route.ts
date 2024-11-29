@@ -39,7 +39,7 @@ export async function GET(req: Request) {
 
 export async function POST(req: Request) {
   try {
-    const { username, displayName, userMsg } = await req.json();
+    const { username, displayName, lineid, userMsg } = await req.json();
 
     await connectMongoDB();
 
@@ -47,6 +47,7 @@ export async function POST(req: Request) {
       username,
       displayName,
       message: userMsg,
+      lineid,
       postDate: convtoTWDate(new Date()),
     });
 

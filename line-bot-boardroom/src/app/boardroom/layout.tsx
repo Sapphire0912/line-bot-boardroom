@@ -28,6 +28,8 @@ export default async function BoardroomLayout({
   const isBind: boolean = headersList.get("isBind") === "true" ? true : false;
   const createAt = headersList.get("createAt");
   const loginMethod = headersList.get("loginMethod");
+  const lineid =
+    headersList.get("lineid") !== "null" ? headersList.get("lineid") : null;
 
   if (!username && !displayName) {
     return (
@@ -50,6 +52,7 @@ export default async function BoardroomLayout({
       loginMethod={loginMethod}
       bind={isBind}
       lastCreateAt={createAt}
+      isLineId={lineid}
     >
       <BoardTitle />
       <section className="min-h-screen flex flex-col">

@@ -14,6 +14,7 @@ export async function POST(req: NextRequest) {
       status: 200,
       username: payload.username || null,
       displayName: payload.displayName || null,
+      lineid: payload.lineid || null,
       role: payload.role,
       loginMethod: payload.loginMethod,
       isBind: payload.isBind,

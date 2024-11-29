@@ -29,23 +29,24 @@ const BoardTitle = () => {
   const { username, displayName, isBind, method } = useUser();
 
   return (
-    <div className="p-4 border-b-2 border-slate-400 bg-slate-200 flex items-center justify-between">
+    <div className="p-2 sm:p-4 border-b-2 border-slate-400 bg-slate-200 flex items-center justify-between">
       <div className="flex items-center">
         <Image
           src="/boardroom-title.png"
           alt="boardroom"
           height={48}
           width={48}
+          className="inline-block xs:hidden"
           priority
         />
-        <h1 className="pl-1 pr-1 text-3xl font-bold text-green-500 text-center">
+        <h1 className="pl-1 pr-1 text-2xl sm:text-3xl font-bold text-green-500 text-center">
           LINE 留言板
         </h1>
       </div>
 
-      <div className="flex items-center pl-2 pr-2">
-        <span className="mr-4 text-xl font-bold">
-          歡迎,&nbsp;
+      <div className="flex items-center pl-2 sm:pr-2">
+        <span className="flex flex-col mr-2 sm:mr-4 text-lg sm:flex-row sm:text-xl font-bold">
+          <p>歡迎,&nbsp;</p>
           <Link
             href="/boardroom/profile"
             className="underline hover:text-blue-800"
@@ -56,7 +57,7 @@ const BoardTitle = () => {
 
         <button
           type="button"
-          className="text-xl font-bold pl-4 pr-4 pt-1 pb-1 border-2 border-blue-300 bg-blue-600 rounded-3xl text-white hover:text-black hover:bg-slate-100"
+          className="font-bold text-lg pl-2 pr-2 sm:text-xl sm:pl-4 sm:pr-4 pt-1 pb-1 border-2 border-blue-300 bg-blue-600 rounded-3xl text-white hover:text-black hover:bg-slate-100"
           onClick={handleLogout}
         >
           登出
