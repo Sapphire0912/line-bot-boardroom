@@ -24,6 +24,7 @@ const MsgRecord = ({
   /* 處理前端取得使用者留言資訊 */
   const [data, setData] = useState<DataType[] | null>(null);
   const [hint, setHint] = useState<string>("");
+  const [expanded, setExpanded] = useState<number | null>(null); // 紀錄展開的卡片索引
 
   const getUserRecord = async () => {
     const response = await userMsgRecord({
@@ -53,20 +54,32 @@ const MsgRecord = ({
   }
 
   return (
-    <div className="border-2 border-black pl-4 pr-4">
-      <div className="border-red-600 border-2">
+    <div className=" pl-4 pr-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {data.length !== 0 ? (
           data.map((content, index) => (
-            <div className="">
-              <div className="delete-patch-div"></div>
-              <div className="post-info">
-                <p className="text-gray-600 p-0.5">
-                  留言時間:{content.postDate}
+            <div
+              key={`${index}-${content.username || content.displayName}`}
+              className="duration-200 hover:scale-105"
+              onClick={
+                () => setExpanded(expanded === index ? null : index) // 切換展開的狀態
+              }
+            >
+              <div className="p-4 border border-gray-300 rounded-lg shadow-md bg-white">
+                <p className="text-gray-600 p-1 text-sm">
+                  留言時間: {content.postDate}
                 </p>
-                <p className="p-1 text-base">{content.message}</p>
+                {/* 根據展開狀態顯示完整或截斷訊息 */}
+                <p
+                  className={`p-1 text-base ${
+                    expanded === index ? "" : "line-clamp-3"
+                  }`}
+                >
+                  {content.message}
+                </p>
                 {content.updateDate &&
                   content.updateDate !== content.postDate && (
-                    <p className="text-gray-600 p-0.5 text-xs">
+                    <p className="text-gray-600 p-0.5 text-sm">
                       更新時間:{content.updateDate}
                     </p>
                   )}

@@ -49,7 +49,7 @@ const profile = () => {
           <button
             type="button"
             onClick={() => handleButton(method)}
-            className="font-bold text-white bg-blue-500 border border-transparent p-2 mt-1 mb-1 rounded-2xl text-lg hover:border hover:border-blue-500 hover:text-black hover:bg-white"
+            className="font-bold text-white bg-blue-500 border border-transparent p-2 mt-1 mb-1 mr-4 rounded-2xl text-lg hover:border hover:border-blue-500 hover:text-black hover:bg-white"
           >
             綁定{method === "Line" ? "本地" : "Line"}帳號
           </button>
