@@ -21,6 +21,7 @@ interface DataType {
 interface MemberType {
   username: string | null;
   displayName: string | null;
+  lineid: string | null;
 }
 interface SearchInfoType {
   searchText: string;
@@ -154,6 +155,7 @@ const adminPage = () => {
                 }-${index}`}
                 username={member.username}
                 displayName={member.displayName}
+                lineid={member.lineid}
               />
             ))
           ) : (

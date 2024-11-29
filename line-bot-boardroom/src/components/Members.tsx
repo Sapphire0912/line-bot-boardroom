@@ -4,10 +4,16 @@ import Image from "next/image";
 const Members = ({
   username,
   displayName,
+  lineid,
 }: {
   username: string | null;
   displayName: string | null;
+  lineid: string | null;
 }) => {
+  /* 處理刪除成員的區塊 */
+  const deleteMemeber = () => {};
+  /* End. */
+
   const handleMemberName = () => {
     const nameStyle: string = "font-bold text-lg";
     if (username && displayName)
@@ -22,7 +28,16 @@ const Members = ({
   return (
     <div className="flex border border-gray-400 justify-between items-center m-2 pt-1 pb-1 pl-4 pr-4 bg-white rounded-lg duration-300 hover:bg-cyan-100">
       {handleMemberName()}
-      <button type="button" className="duration-300 hover:scale-110">
+      {lineid && (
+        <p className="text-sm text-gray-500">
+          {lineid?.length > 5 ? lineid?.slice(0, 5) + "..." : lineid}
+        </p>
+      )}
+      <button
+        type="button"
+        className="duration-300 hover:scale-110"
+        onClick={deleteMemeber}
+      >
         <Image src="/cross.png" alt="cross" width={36} height={36} priority />
         <span>{""}</span>
       </button>

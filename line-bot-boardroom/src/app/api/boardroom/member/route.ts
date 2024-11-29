@@ -13,13 +13,18 @@ export async function POST(req: Request) {
     // 分類使用者
     const onlyLocal = localUsers
       .filter((user) => !user.lineid)
-      .map((user) => ({ username: user.username, displayName: null }));
+      .map((user) => ({
+        username: user.username,
+        displayName: null,
+        lineid: null,
+      }));
 
     const onlyLine = lineUsers
       .filter((lineUser) => !lineUser.localusername)
       .map((lineUser) => ({
         username: null,
         displayName: lineUser.displayName,
+        lineid: lineUser.lineid,
       }));
 
     const bindUsers = lineUsers
@@ -29,6 +34,7 @@ export async function POST(req: Request) {
       .map((lineUser) => ({
         username: lineUser.localusername,
         displayName: lineUser.displayName,
+        lineid: lineUser.lineid,
       }));
 
     const totalMembers = [...onlyLocal, ...onlyLine, ...bindUsers];

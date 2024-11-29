@@ -54,7 +54,7 @@ const MsgRecord = ({
   }
 
   return (
-    <div className=" pl-4 pr-4">
+    <div className="pl-4 pr-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {data.length !== 0 ? (
           data.map((content, index) => (
@@ -69,7 +69,6 @@ const MsgRecord = ({
                 <p className="text-gray-600 p-1 text-sm">
                   留言時間: {content.postDate}
                 </p>
-                {/* 根據展開狀態顯示完整或截斷訊息 */}
                 <p
                   className={`p-1 text-base ${
                     expanded === index ? "" : "line-clamp-3"
