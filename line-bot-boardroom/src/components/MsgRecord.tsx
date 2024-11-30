@@ -18,6 +18,40 @@ interface TextFormType {
   changedText: string | null;
 }
 
+const ConfirmationDialog = ({
+  message,
+  onConfirm,
+  onCancel,
+}: {
+  message: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) => {
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full">
+        <p className="text-lg text-gray-800 mb-4">{message}</p>
+        <div className="flex justify-end space-x-4">
+          <button
+            type="button"
+            onClick={onCancel}
+            className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+          >
+            取消
+          </button>
+          <button
+            type="button"
+            onClick={onConfirm}
+            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+          >
+            確認
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // 任何與留言紀錄相關的操作皆在此處
 
 const MsgRecord = ({
@@ -41,6 +75,7 @@ const MsgRecord = ({
     changedText: null,
   });
   const [isOperation, setIsOperation] = useState<boolean>(false);
+  const [deleteDialog, setDeleteDialog] = useState<string>("");
 
   const handleMsgEdit = (index: number, originalText: string) => {
     // 處理使用者編輯留言的狀態 (重複點選擇關閉)
@@ -70,6 +105,20 @@ const MsgRecord = ({
       userMsg: msgText.originalText,
       updateMsg: msgText.changedText,
       method: "PATCH",
+    });
+    setHint(response.message);
+    setIsOperation(true);
+    setEditing(null);
+  };
+
+  const handleMsgDelete = async (userMsg: string) => {
+    // 處理使用者刪除留言功能
+    const response = await messageAPIs({
+      username,
+      displayName,
+      lineid,
+      userMsg,
+      method: "DELETE",
     });
     setHint(response.message);
     setIsOperation(true);
@@ -142,6 +191,7 @@ const MsgRecord = ({
                       width={28}
                       height={28}
                       className="hover:cursor-pointer hover:scale-105"
+                      onClick={() => setDeleteDialog(content.message)}
                     />
                     <span className="absolute top-full -left-1 mt-1 whitespace-nowrap text-black text-sm bg-slate-200 p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       刪除
@@ -198,6 +248,16 @@ const MsgRecord = ({
           <p className="text-xl">您尚無任何留言紀錄</p>
         )}
       </div>
+      {deleteDialog !== "" && (
+        <ConfirmationDialog
+          message={`確認是否刪除此條留言，刪除後無法復原`}
+          onConfirm={() => {
+            handleMsgDelete(deleteDialog);
+            setDeleteDialog("");
+          }}
+          onCancel={() => setDeleteDialog("")}
+        />
+      )}
     </div>
   );
 };

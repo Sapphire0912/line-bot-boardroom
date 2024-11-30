@@ -91,3 +91,34 @@ export async function PATCH(req: Request) {
     });
   }
 }
+
+export async function DELETE(req: Request) {
+  try {
+    const { username, displayName, lineid, userMsg } = await req.json();
+    await connectMongoDB();
+
+    const deleteMsg = await Boardroom.deleteOne({
+      username,
+      displayName,
+      lineid,
+      message: userMsg,
+    });
+
+    if (!deleteMsg)
+      return NextResponse.json({
+        message: "刪除留言板資料失敗, 查無此使用者的留言",
+        status: 404,
+      });
+
+    return NextResponse.json({
+      message: "刪除留言板資料成功",
+      status: 200,
+    });
+  } catch (error) {
+    console.log("刪除留言板資料失敗, ", error);
+    return NextResponse.json({
+      message: "刪除留言板資料失敗",
+      status: 500,
+    });
+  }
+}

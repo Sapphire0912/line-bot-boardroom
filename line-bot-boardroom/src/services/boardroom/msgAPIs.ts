@@ -69,7 +69,25 @@ export const messageAPIs = async (data: {
       }
 
     case "DELETE":
-      return { message: "DELETE方法尚未實作", status: 500 };
+      try {
+        const response = await fetch("/api/boardroom/message", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            displayName,
+            lineid,
+            userMsg,
+          }),
+        });
+        const info = await response.json();
+        return { message: info.message, status: info.status };
+      } catch (error) {
+        console.error("刪除留言失敗, ", error);
+        return { message: "刪除留言失敗", status: 500 };
+      }
 
     default:
       return { message: "請求方法錯誤", status: 404 };
