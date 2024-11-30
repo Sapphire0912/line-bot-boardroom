@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { userMsgRecord } from "@/services/boardroom/userRecord";
+import { messageAPIs } from "@/services/boardroom/msgAPIs";
 
 interface DataType {
   username: string | null;
@@ -12,9 +13,9 @@ interface DataType {
 }
 
 interface TextFormType {
-  index: number;
-  originalText: string;
-  changedText: string;
+  index: number | null;
+  originalText: string | null;
+  changedText: string | null;
 }
 
 // 任何與留言紀錄相關的操作皆在此處
@@ -32,9 +33,14 @@ const MsgRecord = ({
   const [data, setData] = useState<DataType[] | null>(null);
   const [hint, setHint] = useState<string>("");
 
-  const [expanded, setExpanded] = useState<number | null>(null); // 紀錄展開的卡片索引
+  const [expanded, setExpanded] = useState<number | null>(null); // 紀錄展開的留言索引
   const [editing, setEditing] = useState<number | null>(null);
-  const [msgText, setMsgText] = useState<TextFormType | null>(null);
+  const [msgText, setMsgText] = useState<TextFormType>({
+    index: null,
+    originalText: null,
+    changedText: null,
+  });
+  const [isOperation, setIsOperation] = useState<boolean>(false);
 
   const handleMsgEdit = (index: number, originalText: string) => {
     // 處理使用者編輯留言的狀態 (重複點選擇關閉)
@@ -47,12 +53,27 @@ const MsgRecord = ({
       });
     } else {
       setEditing(null);
-      setMsgText(null);
+      setMsgText({
+        index: null,
+        originalText: null,
+        changedText: null,
+      });
     }
   };
 
-  const msgTextChange = () => {
-    // 處理 form 更新的狀態
+  const handleMsgChanged = async () => {
+    // 處理使用者提交更新後的留言
+    const response = await messageAPIs({
+      username,
+      displayName,
+      lineid,
+      userMsg: msgText.originalText,
+      updateMsg: msgText.changedText,
+      method: "PATCH",
+    });
+    setHint(response.message);
+    setIsOperation(true);
+    setEditing(null);
   };
 
   const getUserRecord = async () => {
@@ -73,7 +94,8 @@ const MsgRecord = ({
 
   useEffect(() => {
     getUserRecord();
-  }, [editing]);
+    setIsOperation(false);
+  }, [editing, isOperation]);
 
   if (!data) {
     return (
@@ -83,7 +105,6 @@ const MsgRecord = ({
     );
   }
 
-  console.log("textarea text:", msgText);
   return (
     <div className="pl-4 pr-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
@@ -156,6 +177,7 @@ const MsgRecord = ({
                       <button
                         type="button"
                         className="px-4 py-2 bg-blue-500 text-white font-bold rounded-2xl hover:bg-blue-600"
+                        onClick={() => handleMsgChanged()}
                       >
                         儲存
                       </button>

@@ -3,12 +3,16 @@ export const messageAPIs = async (data: {
   displayName: string | null;
   lineid: string | null;
   userMsg: string | null;
+  updateMsg?: string | null;
   method: string;
 }) => {
-  const { username, displayName, lineid, userMsg, method } = data;
+  const { username, displayName, lineid, userMsg, updateMsg, method } = data;
 
   if (!userMsg && method !== "GET")
     return { message: "留言欄位不可為空", status: 400 };
+
+  if ((!updateMsg || updateMsg.trim() === "") && method === "PATCH")
+    return { message: "更新留言欄位不可為空", status: 400 };
 
   switch (method) {
     case "GET":
@@ -43,10 +47,29 @@ export const messageAPIs = async (data: {
       }
 
     case "PATCH":
-      return { message: "PATCH方法尚未實作", status: 500 };
+      try {
+        const response = await fetch("/api/boardroom/message", {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            displayName,
+            lineid,
+            userMsg,
+            updateMsg,
+          }),
+        });
+        const info = await response.json();
+        return { message: info.message, status: info.status };
+      } catch (error) {
+        console.error("更新留言失敗, ", error);
+        return { message: "更新留言失敗", status: 500 };
+      }
 
     case "DELETE":
-      return { message: "留言發送失敗", status: 500 };
+      return { message: "DELETE方法尚未實作", status: 500 };
 
     default:
       return { message: "請求方法錯誤", status: 404 };
