@@ -258,6 +258,17 @@ const MsgRecord = ({
           onCancel={() => setDeleteDialog("")}
         />
       )}
+      {/* {hint !== "" && (
+        <p
+          className={`bg-gray-100 text-xl font-bold rounded-2xl transition-opacity duration-500 pt-2 pb-2 pl-4 pr-4 ${
+            status === 201 ? "text-green-400" : "text-red-400"
+          } ${
+            hintAnime ? "opacity-100" : "opacity-0"
+          } absolute -top-16 left-1/2 transform -translate-x-1/2`}
+        >
+          {hint}
+        </p>
+      )} */}
     </div>
   );
 };
