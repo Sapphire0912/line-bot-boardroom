@@ -66,6 +66,8 @@ const MsgRecord = ({
   /* 處理前端取得使用者留言資訊 */
   const [data, setData] = useState<DataType[] | null>(null);
   const [hint, setHint] = useState<string>("");
+  const [status, setStatus] = useState<number>(404);
+  const [hintAnime, setHintAnime] = useState<boolean>(false);
 
   const [expanded, setExpanded] = useState<number | null>(null); // 紀錄展開的留言索引
   const [editing, setEditing] = useState<number | null>(null);
@@ -107,8 +109,16 @@ const MsgRecord = ({
       method: "PATCH",
     });
     setHint(response.message);
+    setStatus(response?.status);
+    setHintAnime(true);
     setIsOperation(true);
     setEditing(null);
+
+    // 只顯示成功訊息 2 秒鐘
+    setTimeout(() => {
+      setHintAnime(false);
+      setTimeout(() => setHint(""), 500);
+    }, 2000);
   };
 
   const handleMsgDelete = async (userMsg: string) => {
@@ -121,8 +131,16 @@ const MsgRecord = ({
       method: "DELETE",
     });
     setHint(response.message);
+    setStatus(response?.status);
+    setHintAnime(true);
     setIsOperation(true);
     setEditing(null);
+
+    // 只顯示成功訊息 2 秒鐘
+    setTimeout(() => {
+      setHintAnime(false);
+      setTimeout(() => setHint(""), 500);
+    }, 2000);
   };
 
   const getUserRecord = async () => {
@@ -155,7 +173,7 @@ const MsgRecord = ({
   }
 
   return (
-    <div className="pl-4 pr-4">
+    <div className="pl-4 pr-4 relative">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
         {data.length !== 0 ? (
           data.map((content, index) => (
@@ -258,17 +276,17 @@ const MsgRecord = ({
           onCancel={() => setDeleteDialog("")}
         />
       )}
-      {/* {hint !== "" && (
+      {hint !== "" && (
         <p
-          className={`bg-gray-100 text-xl font-bold rounded-2xl transition-opacity duration-500 pt-2 pb-2 pl-4 pr-4 ${
-            status === 201 ? "text-green-400" : "text-red-400"
+          className={`bg-white text-xl font-bold rounded-2xl transition-opacity duration-500 pt-2 pb-2 pl-4 pr-4 ${
+            status === 200 ? "text-green-400" : "text-red-400"
           } ${
             hintAnime ? "opacity-100" : "opacity-0"
-          } absolute -top-16 left-1/2 transform -translate-x-1/2`}
+          } absolute  left-1/2 transform -translate-x-1/2`}
         >
           {hint}
         </p>
-      )} */}
+      )}
     </div>
   );
 };

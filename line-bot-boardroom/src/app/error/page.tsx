@@ -6,7 +6,7 @@ const errorPage = () => {
   return (
     <div>
       <Title />
-      發生未知錯誤，
+      已在其他地方登入留言板，
       <Link href="/login" className="underline">
         請返回登入首頁
       </Link>
